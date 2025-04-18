@@ -1,0 +1,48 @@
+(function() {
+
+    var getKey = 'emid';
+    var atnGetKey = 'linksterid';
+
+    var storageKey = 'emid';
+    var atnStorageKey = 'linksterid';
+
+    var emidCookieExpirationDays = 60;
+    var emidCookieKey = 'emid';
+    var atnEmidCookieKey = 'linksterid';
+    var emidCookieDomain = 'Subdomain';
+
+
+    var getValue = getParameterByName(getKey);
+    var atnGetValue = getParameterByName(atnGetKey);
+    
+    if(atnGetValue) {
+        window.localStorage.setItem(atnStorageKey, atnGetValue);
+        var hostname = window.location.hostname;
+        var domainParts = hostname.split(".");
+        var domainLevels = domainParts.length;
+
+        for (let index = 0; index < domainLevels - 1; index++) {
+            var emidCookieDomain = domainParts.slice(index).join(".");
+            setEmidCookie(atnEmidCookieKey, atnGetValue, emidCookieExpirationDays,  emidCookieDomain);
+        }
+    } else if(getValue) {
+        window.localStorage.setItem(storageKey, getValue);
+        var hostname = window.location.hostname;
+        var domainParts = hostname.split(".");
+        var domainLevels = domainParts.length;
+    
+        for (let index = 0; index < domainLevels - 1; index++) {
+            var emidCookieDomain = domainParts.slice(index).join(".");
+            setEmidCookie(emidCookieKey, getValue, emidCookieExpirationDays,  emidCookieDomain);
+        }
+    }
+
+    function setEmidCookie(cname, cvalue, exdays, cdomain) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24*60*60*1000));
+      var expires = "Expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";Path=/;SameSite=none;Domain=" + cdomain + ";Secure";
+    }
+
+    function getParameterByName(e,n){n||(n=window.location.href),e=e.replace(/[[]]/g,"\$&");var r=new RegExp("[?&]"+e+"(=([^&#]*)|&|#|$)").exec(n);return r?r[2]?decodeURIComponent(r[2].replace(/\+/g," ")):"":null}
+})();
