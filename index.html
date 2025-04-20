@@ -1955,48 +1955,17 @@ Tutto è prenotabile in autonomia, in pochi secondi, senza passaggi in reception
 	</div><!-- /.container -->
 </div><!-- /.entry -->
 <section class="section flipping-section" data-cms="block/module-facilities" data-anchor="">
-  <div class="container" id="aloe-widget-root">
-    <!-- ALOE Widget -->
-    <aloe-collection uuid="1efdc88c-ae96-6c88-b8c3-0edb3556f30d"></aloe-collection>
+  <div class="container">
+    <!-- ALOE Widget originale -->
+    <aloe-collection uuid="1f01e329-5930-68d2-985d-0edb3556f30d"></aloe-collection>
     <script async defer src="https://demo.aloesuite.com/widget.js"></script>
   </div>
 </section>
 
-<!-- Spazio extra sotto il widget -->
+<!-- Spazio extra -->
 <div style="height: 160px;"></div>
 
-<!-- Scroll automatico quando cambia il contenuto del widget -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const widgetSection = document.getElementById("aloe-widget-root");
-    const aloe = document.querySelector("aloe-collection");
 
-    if (!widgetSection || !aloe) return;
-
-    const observer = new MutationObserver((mutationsList, observer) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-          widgetSection.scrollIntoView({ behavior: "smooth" });
-          break;
-        }
-      }
-    });
-
-    observer.observe(aloe, {
-      childList: true,
-      subtree: true
-    });
-  });
-</script>
-
-
-        setTimeout(() => {
-          widgetSection.scrollIntoView({ behavior: "smooth" });
-        }, 100); // Aumenta se il contenuto del widget carica più lentamente
-      });
-    }
-  });
-</script>
 
 
 
